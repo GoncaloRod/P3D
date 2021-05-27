@@ -1,14 +1,13 @@
 # Directories
 .vs/
 .idea/
-/bin/
+bin/
 bin-int/
 
 # Files
 # User specific files
 *.user
 
-*.lib
 *.pdb
 
 *.exe
