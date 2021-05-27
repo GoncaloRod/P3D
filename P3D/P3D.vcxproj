@@ -114,6 +114,7 @@
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)P3D\src;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -131,6 +132,7 @@
       <AdditionalIncludeDirectories>$(SolutionDir)P3D\src;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>pch.h</PrecompiledHeaderFile>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -150,6 +152,7 @@
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)P3D\src;$(SolutionDir)Dependencies\GLFW\include;$(SolutionDir)Dependencies\GLEW\include;$(SolutionDir)Dependencies\GLM;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -193,6 +196,67 @@
     <ClInclude Include="src\Renderer\VertexBuffer.h" />
     <ClInclude Include="src\stb_image.h" />
     <ClInclude Include="src\Window.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\models\Iron_Man\Iron_Man.mtl" />
+    <Content Include="assets\models\Iron_Man\Iron_Man.obj" />
+    <Content Include="assets\models\Iron_Man\Iron_Man_D.tga" />
+    <Content Include="assets\models\Sponza\README.md" />
+    <Content Include="assets\models\Sponza\sponza.mtl" />
+    <Content Include="assets\models\Sponza\sponza.obj" />
+    <Content Include="assets\models\Sponza\textures\background.tga" />
+    <Content Include="assets\models\Sponza\textures\background_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\chain_texture.tga" />
+    <Content Include="assets\models\Sponza\textures\chain_texture_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\lion.tga" />
+    <Content Include="assets\models\Sponza\textures\lion2_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\lion_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\spnza_bricks_a_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\spnza_bricks_a_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_arch_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_arch_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_ceiling_a_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_ceiling_a_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_column_a_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_column_a_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_column_b_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_column_b_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_column_c_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_column_c_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_curtain_blue_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_curtain_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_curtain_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_curtain_green_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_details_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_details_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_fabric_blue_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_fabric_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_fabric_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_fabric_green_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_flagpole_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_flagpole_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_floor_a_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_floor_a_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_roof_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_roof_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_thorn_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\sponza_thorn_diff.tga" />
+    <Content Include="assets\models\Sponza\textures\Thumbs.db" />
+    <Content Include="assets\models\Sponza\textures\vase_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\vase_dif.tga" />
+    <Content Include="assets\models\Sponza\textures\vase_hanging.tga" />
+    <Content Include="assets\models\Sponza\textures\vase_hanging_ddn.tga" />
+    <Content Include="assets\models\Sponza\textures\vase_plant.tga" />
+    <Content Include="assets\models\Sponza\textures\vase_round.tga" />
+    <Content Include="assets\models\Sponza\textures\vase_round_ddn.tga" />
+    <Content Include="assets\models\TheRocket\BaseColor.png" />
+    <Content Include="assets\models\TheRocket\Emissive.png" />
+    <Content Include="assets\models\TheRocket\TheRocket.mtl" />
+    <Content Include="assets\models\TheRocket\TheRocket.obj" />
+    <Content Include="assets\shaders\Basic.vert" />
+    <Content Include="assets\shaders\Phong.frag" />
+    <Content Include="assets\shaders\Phong.vert" />
+    <Content Include="assets\shaders\SolidColor.frag" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
