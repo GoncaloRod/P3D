@@ -7,8 +7,8 @@
 
 #include "glm/ext/matrix_clip_space.hpp"
 
-Camera::Camera(float fov, float nearPlane, float farPlane, Window* pWindow)
-	: m_pWindow(pWindow), m_FOV(fov), m_NearPlane(nearPlane), m_FarPlane(farPlane)
+Camera::Camera(float fov, float nearPlane, float farPlane, Window* pWindow, glm::vec3 position)
+	: m_pWindow(pWindow), m_FOV(fov), m_NearPlane(nearPlane), m_FarPlane(farPlane), m_Position(position)
 {
 	int32_t width, height;
 
@@ -23,3 +23,7 @@ void Camera::Resize(int width, int height)
 	
 	m_ProjectionMat = glm::perspective(m_FOV, kRatio, m_NearPlane, m_FarPlane);
 }
+
+void Camera::OnEnable() { }
+
+void Camera::OnDisable() {}

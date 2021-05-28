@@ -5,6 +5,7 @@
 #include "Window.h"
 
 #include "Cameras/FreeCamera.h"
+#include "Cameras/OrbitCamera.h"
 #include "Graphics/Model.h"
 #include "Renderer/Shader.h"
 
@@ -17,9 +18,13 @@ int main(int argc, char** argv)
 
 	currentFrame = lastFrame = glfwGetTime();
 
-	// Setup camera
-	FreeCamera camera = FreeCamera(glm::radians(45.0f), 0.01f, 1000.0f, &window, glm::vec3(0.0f, 1.0f, 5.0f), glm::vec3(0.0f, glm::radians(180.0f), 0.0f));
+	// Setup cameras
+	FreeCamera freeCamera = FreeCamera(glm::radians(45.0f), 0.01f, 1000.0f, &window, glm::vec3(0.0f, 1.0f, 5.0f), glm::vec3(0.0f, glm::radians(180.0f), 0.0f));
+	OrbitCamera orbitCamera = OrbitCamera(glm::radians(45.0f), 0.01f, 1000.0f, &window, { 0.0f, 1.0f, 0.0f });
 
+	Camera* activeCamera = &orbitCamera;
+	activeCamera->OnEnable();
+	
 	// Load assets
 	auto shader = std::make_shared<Shader>("assets/shaders/Phong.vert", "assets/shaders/Phong.frag");
 
@@ -53,7 +58,20 @@ int main(int argc, char** argv)
 		lastFrame = currentFrame;
 		
 		// Update
-		camera.Update(static_cast<float>(deltaTime));
+		if (glfwGetKey(window.GetNativeWindow(), GLFW_KEY_F1))
+		{
+			activeCamera->OnDisable();
+			activeCamera = &orbitCamera;
+			activeCamera->OnEnable();
+		}
+		else if (glfwGetKey(window.GetNativeWindow(), GLFW_KEY_F2))
+		{
+			activeCamera->OnDisable();
+			activeCamera = &freeCamera;
+			activeCamera->OnEnable();
+		}
+		
+		activeCamera->Update(static_cast<float>(deltaTime));
 
 		// Draw
 		glClearColor(ambientColor.r, ambientColor.g, ambientColor.b, 1.0f);
@@ -61,15 +79,15 @@ int main(int argc, char** argv)
 
 		shader->Bind();
 
-		shader->SetMat4("u_View", camera.GetViewMatrix());
-		shader->SetMat4("u_Projection", camera.GetProjectionMatrix());
+		shader->SetMat4("u_View", activeCamera->GetViewMatrix());
+		shader->SetMat4("u_Projection", activeCamera->GetProjectionMatrix());
 
 		shader->SetVec3("u_AmbientColor", ambientColor);
 
 		shader->SetVec3("u_DirectionalLightPosition", directionLightPos);
 		shader->SetVec3("u_DirectionalLightColor", glm::vec3(1.0f));
 
-		shader->SetVec3("u_CameraPos", camera.GetPosition());
+		shader->SetVec3("u_CameraPos", activeCamera->GetPosition());
 
 		rocket->Draw();
 		ironMan->Draw();

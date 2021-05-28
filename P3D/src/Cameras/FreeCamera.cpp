@@ -8,7 +8,7 @@
 #include "glm/ext/matrix_transform.hpp"
 
 FreeCamera::FreeCamera(float fov, float nearPlane, float farPlane, Window* window, glm::vec3 position, glm::vec3 rotation)
-	: Camera(fov, nearPlane, farPlane, window), m_Position(position), m_Rotation(rotation)
+	: Camera(fov, nearPlane, farPlane, window, position), m_Rotation(rotation)
 {
 	double mouseX, mouseY;
 	glfwGetCursorPos(m_pWindow->GetNativeWindow(), &mouseX, &mouseY);

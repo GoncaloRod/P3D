@@ -9,7 +9,7 @@ class Camera
 {
 public:
 
-    Camera(float fov, float nearPlane, float farPlane, Window* pWindow);
+    Camera(float fov, float nearPlane, float farPlane, Window* pWindow, glm::vec3 position);
 	~Camera() = default;
 
     /**
@@ -40,6 +40,16 @@ public:
     }
 
 	/**
+	 * Get camera's position.
+	 *
+	 * @return 3 dimensional vector with camera's position.
+	 */
+	constexpr glm::vec3 GetPosition() const
+    {
+    	return m_Position;
+    }
+
+	/**
 	 * Resize camera projection matrix.
 	 *
 	 * @param width New window width.
@@ -47,10 +57,16 @@ public:
 	 */
 	inline void Resize(int width, int height);
 
+	virtual void OnEnable();
+
+	virtual void OnDisable();
+
 protected:
 
     glm::mat4x4 m_ViewMat;
     glm::mat4x4 m_ProjectionMat;
+
+	glm::vec3 m_Position;
 
     Window* m_pWindow;
 
