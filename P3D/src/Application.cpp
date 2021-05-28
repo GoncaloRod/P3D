@@ -23,14 +23,14 @@ int main(int argc, char** argv)
 	// Load assets
 	auto shader = std::make_shared<Shader>("assets/shaders/Phong.vert", "assets/shaders/Phong.frag");
 
-	/*
 	auto rocket = Model::LoadFromObj(shader, "assets/models/TheRocket/TheRocket.obj");
 	if (rocket == nullptr)
 	{
 		std::cout << "Failed to load model" << std::endl;
 		return 0;
 	}
-	*/
+
+	rocket->SetPosition({ -2.0f, 0.0f, 0.0f });
 
 	auto ironMan = Model::LoadFromObj(shader, "assets/models/Iron_Man/Iron_Man.obj");
 	if (ironMan == nullptr)
@@ -38,6 +38,8 @@ int main(int argc, char** argv)
 		std::cout << "Failed to load model" << std::endl;
 		return 0;
 	}
+
+	ironMan->SetPosition({ 2.0f, 0.0f, 0.0f });
 	
 	glm::vec3 ambientColor = glm::vec3(0.1f, 0.1f, 0.1f);
 
@@ -69,7 +71,7 @@ int main(int argc, char** argv)
 
 		shader->SetVec3("u_CameraPos", camera.GetPosition());
 
-		//rocket->Draw();
+		rocket->Draw();
 		ironMan->Draw();
 
 		// OpenGL things

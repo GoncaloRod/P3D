@@ -46,7 +46,7 @@ void Material::Bind() const
 	}
 	else
 	{
-		m_pShader->SetBool("u_Material.HasDiffuseMap", false);
+		m_pShader->SetBool("u_Material.HasEmissiveMap", false);
 	}
 }
 
