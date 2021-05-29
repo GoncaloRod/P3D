@@ -49,6 +49,11 @@ int main(int argc, char** argv)
 	glm::vec3 ambientColor = glm::vec3(0.1f, 0.1f, 0.1f);
 
 	glm::vec3 directionLightPos = glm::vec3(10.0f, 10.0f, 10.0f);
+
+	bool ambientEnable = true;
+	bool directionalEnable = true;
+	bool pointEnable = false;
+	bool spotEnable = false;
 	
 	while (!window.ShouldClose())
 	{
@@ -56,20 +61,32 @@ int main(int argc, char** argv)
 		currentFrame = glfwGetTime();
 		deltaTime = currentFrame - lastFrame;
 		lastFrame = currentFrame;
-		
+
 		// Update
-		if (glfwGetKey(window.GetNativeWindow(), GLFW_KEY_F1))
+		if (glfwGetKey(window.GetNativeWindow(), GLFW_KEY_F1) == GLFW_PRESS)
 		{
 			activeCamera->OnDisable();
 			activeCamera = &orbitCamera;
 			activeCamera->OnEnable();
 		}
-		else if (glfwGetKey(window.GetNativeWindow(), GLFW_KEY_F2))
+		else if (glfwGetKey(window.GetNativeWindow(), GLFW_KEY_F2) == GLFW_PRESS)
 		{
 			activeCamera->OnDisable();
 			activeCamera = &freeCamera;
 			activeCamera->OnEnable();
 		}
+
+		if (glfwGetKey(window.GetNativeWindow(), GLFW_KEY_1) == GLFW_PRESS)
+			ambientEnable = !ambientEnable;
+
+		if (glfwGetKey(window.GetNativeWindow(), GLFW_KEY_2) == GLFW_PRESS)
+			directionalEnable = !directionalEnable;
+
+		if (glfwGetKey(window.GetNativeWindow(), GLFW_KEY_3) == GLFW_PRESS)
+			pointEnable = !pointEnable;
+
+		if (glfwGetKey(window.GetNativeWindow(), GLFW_KEY_4) == GLFW_PRESS)
+			spotEnable = !spotEnable;
 		
 		activeCamera->Update(static_cast<float>(deltaTime));
 
@@ -82,10 +99,27 @@ int main(int argc, char** argv)
 		shader->SetMat4("u_View", activeCamera->GetViewMatrix());
 		shader->SetMat4("u_Projection", activeCamera->GetProjectionMatrix());
 
-		shader->SetVec3("u_AmbientColor", ambientColor);
+		shader->SetBool("u_Lighting.AmbientEnable", ambientEnable);
+		shader->SetBool("u_Lighting.DirectionalEnable", directionalEnable);
+		shader->SetBool("u_Lighting.PointEnable", pointEnable);
+		shader->SetBool("u_Lighting.SpotEnable", spotEnable);
 
-		shader->SetVec3("u_DirectionalLightPosition", directionLightPos);
-		shader->SetVec3("u_DirectionalLightColor", glm::vec3(1.0f));
+		shader->SetVec3("u_Lighting.Ambient.Color", ambientColor);
+
+		shader->SetVec3("u_Lighting.Directional.Direction", { -1, -1, 0});
+		shader->SetVec3("u_Lighting.Directional.Color", glm::vec3(1.0f));
+
+		shader->SetVec3("u_Lighting.Point.Position", freeCamera.GetPosition());
+		shader->SetVec3("u_Lighting.Point.Color", { 1.0f, 1.0f, 1.0f });
+		shader->SetFloat("u_Lighting.Point.Constant", 1.0f);
+		shader->SetFloat("u_Lighting.Point.Linear", 0.09f);
+		shader->SetFloat("u_Lighting.Point.Quadratic", 0.032f);
+
+		shader->SetVec3("u_Lighting.Spot.Position", freeCamera.GetPosition());
+		shader->SetVec3("u_Lighting.Spot.Direction", freeCamera.GetForward());
+		shader->SetVec3("u_Lighting.Spot.Color", { 1.0f, 1.0f, 1.0f });
+		shader->SetFloat("u_Lighting.Spot.InnerCutOff", glm::cos(glm::radians(10.0f)));
+		shader->SetFloat("u_Lighting.Spot.OuterCutOff", glm::cos(glm::radians(17.5f)));
 
 		shader->SetVec3("u_CameraPos", activeCamera->GetPosition());
 

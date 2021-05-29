@@ -11,6 +11,21 @@ public:
 
 	virtual void Update(const float dt) override;
 
+	constexpr glm::vec3 GetForward() const
+	{
+		return m_Forward;
+	}
+
+	constexpr glm::vec3 GetRight() const
+	{
+		return m_Right;
+	}
+
+	constexpr glm::vec3 GetUp() const
+	{
+		return m_Up;
+	}
+
 private:
 
 	void UpdateCameraVectors();
@@ -22,6 +37,6 @@ private:
 
 	glm::vec2 m_LastMousePos;
 
-	const float kCameraMovementSpeed = 2.0f;
-	const float kCameraRotationSpeed = 2.0f;
+	const float kCameraMovementSpeed = 5.0f;
+	const float kCameraRotationSpeed = 5.0f;
 };

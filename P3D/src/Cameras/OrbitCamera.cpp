@@ -22,8 +22,17 @@ void OrbitCamera::Update(const float dt)
 	
 	UpdateCameraVectors();
 
-	// WARNING: Up vector might not be correct
 	m_ViewMat = glm::lookAt(m_Position, m_LookAt, kWorldUp);
+}
+
+void OrbitCamera::OnEnable()
+{
+	glfwSetInputMode(m_pWindow->GetNativeWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
+}
+
+void OrbitCamera::OnDisable()
+{
+	glfwSetInputMode(m_pWindow->GetNativeWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
 
 void OrbitCamera::GetInput(const float dt)
@@ -36,8 +45,8 @@ void OrbitCamera::GetInput(const float dt)
 	double deltaX = mouseX - m_LastMousePos.x;
 	double deltaY = mouseY - m_LastMousePos.y;
 
-	m_Rotation.x += deltaX * kCameraRotationSpeed * dt;
-	m_Rotation.y += deltaY * kCameraRotationSpeed * dt;
+	m_Rotation.x += static_cast<float>(deltaX) * kCameraRotationSpeed * dt;
+	m_Rotation.y += static_cast<float>(deltaY) * kCameraRotationSpeed * dt;
 
 	if (m_Rotation.x > glm::pi<float>() * 2)
 		m_Rotation.x -= glm::pi<float>() * 2;
@@ -65,14 +74,4 @@ void OrbitCamera::UpdateCameraVectors()
 	base = base * rotation;
 
 	m_Position = glm::vec3(base.x, base.y, base.z) * m_CameraDistance + m_LookAt;
-}
-
-void OrbitCamera::OnEnable()
-{
-	glfwSetInputMode(m_pWindow->GetNativeWindow(), GLFW_CURSOR, GLFW_CURSOR_DISABLED);
-}
-
-void OrbitCamera::OnDisable()
-{
-	glfwSetInputMode(m_pWindow->GetNativeWindow(), GLFW_CURSOR, GLFW_CURSOR_NORMAL);
 }
