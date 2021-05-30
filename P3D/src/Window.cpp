@@ -6,9 +6,10 @@ Window::Window(const std::string& title, uint32_t width, uint32_t height, bool v
     : m_Title(title), m_Width(width), m_Height(height), m_pWindow(nullptr), m_VSync(vsync)
 {
 	glfwInit();
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	glfwWindowHint(GLFW_SAMPLES, 4);
 #ifdef MAC
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
@@ -45,6 +46,9 @@ Window::Window(const std::string& title, uint32_t width, uint32_t height, bool v
 
 	// Enable back-face culling
 	glEnable(GL_CULL_FACE);
+
+	// Enable MSAA
+	glEnable(GL_MULTISAMPLE);
 
 	if (glfwRawMouseMotionSupported())
 		glfwSetInputMode(m_pWindow, GLFW_RAW_MOUSE_MOTION, GLFW_TRUE);
