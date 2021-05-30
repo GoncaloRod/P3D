@@ -2,9 +2,12 @@
 
 out vec4 FragColor;
 
-in vec3 normal;
-in vec2 textCoord;
-in vec3 fragPos;
+in V2F
+{
+    vec3 normal;
+    vec2 textCoord;
+    vec3 fragPos;
+} v2f;
 
 /* Material properties */
 uniform struct Material
@@ -78,13 +81,13 @@ vec4 CalculateSpotLight();
 void main()
 {
     // If a texture has given use sample from texture, if not use a neutral value (white)
-    vec4 diffuseSample = u_Material.HasDiffuseMap ? texture(u_Material.DiffuseMap, textCoord) : vec4(1.0);
+    vec4 diffuseSample = u_Material.HasDiffuseMap ? texture(u_Material.DiffuseMap, v2f.textCoord) : vec4(1.0);
     
     // Diffuse color
     vec4 diffuseColor = diffuseSample * vec4(u_Material.DiffuseColor, 1.0f);
     
     // Emissive color, if a texture was given use sample from texture, if not use emissive color
-    vec4 emissiveSample = u_Material.HasEmissiveMap ? texture(u_Material.EmissiveMap, textCoord) : vec4(u_Material.EmissiveColor, 1.0f);
+    vec4 emissiveSample = u_Material.HasEmissiveMap ? texture(u_Material.EmissiveMap, v2f.textCoord) : vec4(u_Material.EmissiveColor, 1.0f);
 
     vec4 light = vec4(0.0f, 0.0f, 0.0f, 1.0f);
     
@@ -113,13 +116,13 @@ vec4 CalculateDirectionLight()
 {
     DirectionalLight light = u_Lighting.Directional;
     
-    vec3 norm = normalize(normal);
+    vec3 norm = normalize(v2f.normal);
     vec3 lightDir = normalize(-light.Direction);
 
     float diff = max(dot(norm, lightDir), 0.0f);
     vec4 diffuse = vec4(diff * light.Color, 1.0f);
 
-    vec3 viewDir = normalize(u_CameraPos - fragPos);
+    vec3 viewDir = normalize(u_CameraPos - v2f.fragPos);
     vec3 reflectionDir = reflect(-lightDir, norm);
 
     float spec = pow(max(dot(viewDir, reflectionDir), 0.0f), u_Material.SpecularExponent);
@@ -132,19 +135,19 @@ vec4 CalculatePointLight()
 {
     PointLight light = u_Lighting.Point;
     
-    vec3 norm = normalize(normal);
-    vec3 lightDir = normalize(light.Position - fragPos);
+    vec3 norm = normalize(v2f.normal);
+    vec3 lightDir = normalize(light.Position - v2f.fragPos);
 
     float diff = max(dot(norm, lightDir), 0.0f);
     vec4 diffuse = vec4(diff * light.Color, 1.0f);
     
-    vec3 viewDir = normalize(u_CameraPos - fragPos);
+    vec3 viewDir = normalize(u_CameraPos - v2f.fragPos);
     vec3 reflectionDir = reflect(-lightDir, norm);
 
     float spec = pow(max(dot(viewDir, reflectionDir), 0.0f), u_Material.SpecularExponent);
     vec4 specular = vec4(spec * u_Material.SpecularColor, 1.0f);
 
-    float distance = length(light.Position - fragPos);
+    float distance = length(light.Position - v2f.fragPos);
     float attenuation = 1.0f / (light.Constant + light.Linear * distance + light.Quadratic * (distance * distance));
 
     return (diffuse + specular) * attenuation;
@@ -154,13 +157,13 @@ vec4 CalculateSpotLight()
 {
     SpotLight light = u_Lighting.Spot;
 
-    vec3 norm = normalize(normal);
-    vec3 lightDir = normalize(light.Position - fragPos);
+    vec3 norm = normalize(v2f.normal);
+    vec3 lightDir = normalize(light.Position - v2f.fragPos);
 
     float diff = max(dot(norm, lightDir), 0.0f);
     vec4 diffuse = vec4(diff * light.Color, 1.0f);
 
-    vec3 viewDir = normalize(u_CameraPos - fragPos);
+    vec3 viewDir = normalize(u_CameraPos - v2f.fragPos);
     vec3 reflectionDir = reflect(-lightDir, norm);
 
     float spec = pow(max(dot(viewDir, reflectionDir), 0.0f), u_Material.SpecularExponent);
