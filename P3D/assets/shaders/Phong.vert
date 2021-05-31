@@ -15,11 +15,13 @@ uniform mat4 u_Model;
 uniform mat4 u_View;
 uniform mat4 u_Projection;
 
+uniform float u_Inflation;
+
 void main()
 {
-    gl_Position = u_Projection * u_View * u_Model * vec4(aPos, 1.0f);
-
     v2f.normal = mat3(transpose(inverse(u_Model))) *  aNormal;
     v2f.textCoord = aTextCoord;
     v2f.fragPos = vec3(u_Model * vec4(aPos, 1.0f));
+    
+    gl_Position = u_Projection * u_View * u_Model * (vec4(aPos + (v2f.normal * u_Inflation), 1.0f));
 }

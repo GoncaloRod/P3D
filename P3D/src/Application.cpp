@@ -54,6 +54,8 @@ int main(int argc, char** argv)
 	bool directionalEnable = true;
 	bool pointEnable = false;
 	bool spotEnable = false;
+
+	bool inflation = false;
 	
 	while (!window.ShouldClose())
 	{
@@ -87,6 +89,9 @@ int main(int argc, char** argv)
 
 		if (glfwGetKey(window.GetNativeWindow(), GLFW_KEY_4) == GLFW_PRESS)
 			spotEnable = !spotEnable;
+
+		if (glfwGetKey(window.GetNativeWindow(), GLFW_KEY_T) == GLFW_PRESS)
+			inflation = !inflation;
 		
 		activeCamera->Update(static_cast<float>(deltaTime));
 
@@ -123,7 +128,13 @@ int main(int argc, char** argv)
 
 		shader->SetVec3("u_CameraPos", activeCamera->GetPosition());
 
+		shader->SetFloat("u_Inflation", 0.0f);
+
 		rocket->Draw();
+
+		if (inflation)
+			shader->SetFloat("u_Inflation", (glm::sin(static_cast<long double>(glfwGetTime())) / 2 + 0.5f) * 0.1f);
+		
 		ironMan->Draw();
 
 		// OpenGL things
