@@ -31,6 +31,11 @@ public:
 		return m_pEmissiveMap;
 	}
 
+	inline std::shared_ptr<Texture2D> GetNormalMap() const
+	{
+		return m_pNormalMap;
+	}
+
 	constexpr glm::vec3 GetDiffuseColor() const
 	{
 		return m_DiffuseColor;
@@ -56,6 +61,11 @@ public:
 		m_pEmissiveMap = texture;
 	}
 
+	inline void SetNormalMap(std::shared_ptr<Texture2D> texture)
+	{
+		m_pNormalMap = texture;
+	}
+
 	inline void SetDiffuseColor(glm::vec3 diffuseColor)
 	{
 		m_DiffuseColor = diffuseColor;
@@ -79,6 +89,7 @@ private:
 	
 	std::shared_ptr<Texture2D> m_pDiffuseMap;
 	std::shared_ptr<Texture2D> m_pEmissiveMap;
+	std::shared_ptr<Texture2D> m_pNormalMap;
 
 	glm::vec3 m_DiffuseColor;
 	glm::vec3 m_EmissiveColor;

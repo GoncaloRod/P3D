@@ -1,4 +1,4 @@
-#version 400 core
+#version 430 core
 
 out vec4 FragColor;
 
@@ -14,13 +14,16 @@ uniform struct Material
 {
     bool HasDiffuseMap;
     bool HasEmissiveMap;
-    
+    bool HasNormalMap;
+
     sampler2D DiffuseMap;
     vec3 DiffuseColor;
-    
+        
     sampler2D EmissiveMap;
     vec3 EmissiveColor;
 
+    sampler2D NormalMap;
+    
     vec3 SpecularColor;
     float SpecularExponent;
 } u_Material;
@@ -88,7 +91,7 @@ void main()
     
     // Emissive color, if a texture was given use sample from texture, if not use emissive color
     vec4 emissiveSample = u_Material.HasEmissiveMap ? texture(u_Material.EmissiveMap, v2f.textCoord) : vec4(u_Material.EmissiveColor, 1.0f);
-
+    
     vec4 light = vec4(0.0f, 0.0f, 0.0f, 1.0f);
     
     // Ambient light
@@ -107,9 +110,7 @@ void main()
     if (u_Lighting.SpotEnable)
         light += CalculateSpotLight();
     
-    FragColor = light * diffuseColor;
-    //FragColor = diffuseSample;
-    //FragColor = emissiveSample;
+    FragColor = light * diffuseColor + emissiveSample;
 }
 
 vec4 CalculateDirectionLight()
