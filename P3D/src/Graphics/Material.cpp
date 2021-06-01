@@ -50,17 +50,6 @@ void Material::Bind() const
 	{
 		m_pShader->SetBool("u_Material.HasEmissiveMap", false);
 	}
-
-	if (m_pNormalMap.get() != nullptr)
-	{
-		m_pNormalMap->Bind(2);
-		m_pShader->SetInt("u_Material.NormalMap", 2);
-		m_pShader->SetBool("u_Material.HasNormalMap", true);
-	}
-	else
-	{
-		m_pShader->SetBool("u_Material.HasNormalMap", false);
-	}
 }
 
 std::unordered_map<std::string, std::shared_ptr<Material>> Material::LoadFromMtl(std::shared_ptr<Shader> pShader, const std::string& filePath)
@@ -134,12 +123,6 @@ std::unordered_map<std::string, std::shared_ptr<Material>> Material::LoadFromMtl
 			std::string textFileName;
 			stream >> textFileName;
 			selectedMat->SetEmissiveMap(std::make_shared<Texture2D>(directory + '/' + textFileName));
-		}
-		else if (prefix == "map_Bump")
-		{
-			std::string textFileName;
-			stream >> textFileName;
-			selectedMat->SetNormalMap(std::make_shared<Texture2D>(directory + '/' + textFileName));
 		}
 	}
 

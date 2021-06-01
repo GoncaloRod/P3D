@@ -14,7 +14,6 @@ uniform struct Material
 {
     bool HasDiffuseMap;
     bool HasEmissiveMap;
-    bool HasNormalMap;
 
     sampler2D DiffuseMap;
     vec3 DiffuseColor;
@@ -22,8 +21,6 @@ uniform struct Material
     sampler2D EmissiveMap;
     vec3 EmissiveColor;
 
-    sampler2D NormalMap;
-    
     vec3 SpecularColor;
     float SpecularExponent;
 } u_Material;
