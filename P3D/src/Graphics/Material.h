@@ -14,6 +14,9 @@ public:
 	Material(std::shared_ptr<Shader> pShader, std::shared_ptr<Texture2D> pDiffuseMap, std::shared_ptr<Texture2D> pEmissiveMap);
 	~Material() = default;
 
+	/**
+	 * Bind this material.
+	 */
 	void Bind() const;
 
 	inline std::shared_ptr<Shader> GetShader() const
@@ -71,6 +74,14 @@ public:
 		m_SpecularExponent = specularExponent;
 	}
 
+	/**
+	 * Load materials from a .mtl file.
+	 *
+	 * @param pShader Pointer to the shader to be used by loaded materials.
+	 * @param filePath Path to the .mtl file.
+	 *
+	 * @return Unordered map with every material loaded identified by their name.
+	 */
 	static std::unordered_map<std::string, std::shared_ptr<Material>> LoadFromMtl(std::shared_ptr<Shader> pShader, const std::string& filePath);
 
 private:

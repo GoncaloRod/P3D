@@ -20,6 +20,11 @@ public:
 	Mesh(const std::vector<Vertex>& vertices, const std::vector<uint32_t>& indices, std::shared_ptr<Material> pMaterial);
 	~Mesh() = default;
 
+	/**
+	 * Draw this mesh.
+	 *
+	 * @param modelMat Model matrix to use when drawing.
+	 */
 	void Draw(glm::mat4 modelMat) const;
 
 private:

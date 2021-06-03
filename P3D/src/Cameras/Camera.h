@@ -57,8 +57,16 @@ public:
 	 */
 	inline void Resize(int width, int height);
 
+	/**
+	 * Function called when camera is enabled.
+	 * Each type of camera have specific behaviours.
+	 */
 	virtual void OnEnable();
 
+	/**
+	 * Function called when camera is enabled.
+	 * Each type of camera have specific behaviours.
+	 */
 	virtual void OnDisable();
 
 protected:

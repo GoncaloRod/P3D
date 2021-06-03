@@ -11,16 +11,31 @@ public:
 
 	virtual void Update(const float dt) override;
 
+	/**
+	 * Get camera's forward vector.
+	 *
+	 * @return 3 dimensional vector with camera's forward direction.
+	 */
 	constexpr glm::vec3 GetForward() const
 	{
 		return m_Forward;
 	}
 
+	/**
+	 * Get camera's right vector.
+	 *
+	 * @return 3 dimensional vector with camera's right direction.
+	 */
 	constexpr glm::vec3 GetRight() const
 	{
 		return m_Right;
 	}
 
+	/**
+	 * Get camera's up vector.
+	 *
+	 * @return 3 dimensional vector with camera's up direction.
+	 */
 	constexpr glm::vec3 GetUp() const
 	{
 		return m_Up;

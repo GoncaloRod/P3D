@@ -9,11 +9,21 @@ public:
 	Window(const std::string& title, uint32_t width, uint32_t height, bool vsync = false);
 	~Window();
 
+	/**
+	 * Get window size in pixels.
+	 *
+	 * @return Pair o unsigned integers.
+	 */
 	constexpr std::pair<uint32_t, uint32_t> GetWindowSize() const
 	{
 		return { m_Width, m_Height };
 	}
 
+	/**
+	 * Get reference to the native window.
+	 *
+	 * @return Pointer to a GLFWwindow.
+	 */
 	constexpr GLFWwindow* GetNativeWindow() const
 	{
 		return m_pWindow;
