@@ -119,6 +119,8 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib;$(SolutionDir)Dependencies\GLEW\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -159,6 +161,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalDependencies>glew32s.lib;glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>$(SolutionDir)Dependencies\GLFW\lib;$(SolutionDir)Dependencies\GLEW\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
@@ -203,54 +207,6 @@
     <Content Include="assets\models\Iron_Man\Iron_Man.mtl" />
     <Content Include="assets\models\Iron_Man\Iron_Man.obj" />
     <Content Include="assets\models\Iron_Man\Iron_Man_D.tga" />
-    <Content Include="assets\models\Sponza\README.md" />
-    <Content Include="assets\models\Sponza\sponza.mtl" />
-    <Content Include="assets\models\Sponza\sponza.obj" />
-    <Content Include="assets\models\Sponza\textures\background.tga" />
-    <Content Include="assets\models\Sponza\textures\background_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\chain_texture.tga" />
-    <Content Include="assets\models\Sponza\textures\chain_texture_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\lion.tga" />
-    <Content Include="assets\models\Sponza\textures\lion2_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\lion_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\spnza_bricks_a_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\spnza_bricks_a_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_arch_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_arch_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_ceiling_a_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_ceiling_a_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_column_a_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_column_a_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_column_b_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_column_b_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_column_c_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_column_c_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_curtain_blue_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_curtain_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_curtain_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_curtain_green_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_details_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_details_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_fabric_blue_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_fabric_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_fabric_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_fabric_green_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_flagpole_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_flagpole_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_floor_a_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_floor_a_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_roof_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_roof_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_thorn_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\sponza_thorn_diff.tga" />
-    <Content Include="assets\models\Sponza\textures\Thumbs.db" />
-    <Content Include="assets\models\Sponza\textures\vase_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\vase_dif.tga" />
-    <Content Include="assets\models\Sponza\textures\vase_hanging.tga" />
-    <Content Include="assets\models\Sponza\textures\vase_hanging_ddn.tga" />
-    <Content Include="assets\models\Sponza\textures\vase_plant.tga" />
-    <Content Include="assets\models\Sponza\textures\vase_round.tga" />
-    <Content Include="assets\models\Sponza\textures\vase_round_ddn.tga" />
     <Content Include="assets\models\TheRocket\BaseColor.png" />
     <Content Include="assets\models\TheRocket\Emissive.png" />
     <Content Include="assets\models\TheRocket\TheRocket.mtl" />

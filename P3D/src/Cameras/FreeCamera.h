@@ -52,6 +52,6 @@ private:
 
 	glm::vec2 m_LastMousePos;
 
-	const float kCameraMovementSpeed = 5.0f;
+	const float kCameraMovementSpeed = 2.0f;
 	const float kCameraRotationSpeed = 5.0f;
 };

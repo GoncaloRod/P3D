@@ -12,7 +12,7 @@ public:
 	{
 		return {
 			{ ShaderDataType::Float3 },
-			{ ShaderDataType::Float3 },
+			{ ShaderDataType::Float3, true },
 			{ ShaderDataType::Float2 },
 		};
 	}

@@ -48,8 +48,6 @@ int main(int argc, char** argv)
 	
 	glm::vec3 ambientColor = glm::vec3(0.1f, 0.1f, 0.1f);
 
-	glm::vec3 directionLightPos = glm::vec3(10.0f, 10.0f, 10.0f);
-
 	bool ambientEnable = true;
 	bool directionalEnable = true;
 	bool pointEnable = false;
@@ -101,8 +99,9 @@ int main(int argc, char** argv)
 
 		shader->Bind();
 
-		shader->SetMat4("u_View", activeCamera->GetViewMatrix());
-		shader->SetMat4("u_Projection", activeCamera->GetProjectionMatrix());
+		//shader->SetMat4("u_View", activeCamera->GetViewMatrix());
+		//shader->SetMat4("u_Projection", activeCamera->GetProjectionMatrix());
+		shader->SetMat4("u_ViewProjection", activeCamera->GetProjectionMatrix() * activeCamera->GetViewMatrix());
 
 		shader->SetBool("u_Lighting.AmbientEnable", ambientEnable);
 		shader->SetBool("u_Lighting.DirectionalEnable", directionalEnable);
@@ -133,7 +132,7 @@ int main(int argc, char** argv)
 		rocket->Draw();
 
 		if (inflation)
-			shader->SetFloat("u_Inflation", (glm::sin(static_cast<long double>(glfwGetTime())) / 2 + 0.5f) * 0.1f);
+			shader->SetFloat("u_Inflation", (glm::sin(static_cast<float>(glfwGetTime())) / 2 + 0.5f) * 0.1f);
 		
 		ironMan->Draw();
 

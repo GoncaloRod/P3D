@@ -1,4 +1,4 @@
-#version 430 core
+#version 440 core
 
 out vec4 FragColor;
 
@@ -114,14 +114,13 @@ vec4 CalculateDirectionLight()
 {
     DirectionalLight light = u_Lighting.Directional;
     
-    vec3 norm = normalize(v2f.normal);
     vec3 lightDir = normalize(-light.Direction);
 
-    float diff = max(dot(norm, lightDir), 0.0f);
+    float diff = max(dot(v2f.normal, lightDir), 0.0f);
     vec4 diffuse = vec4(diff * light.Color, 1.0f);
 
     vec3 viewDir = normalize(u_CameraPos - v2f.fragPos);
-    vec3 reflectionDir = reflect(-lightDir, norm);
+    vec3 reflectionDir = reflect(-lightDir, v2f.normal);
 
     float spec = pow(max(dot(viewDir, reflectionDir), 0.0f), u_Material.SpecularExponent);
     vec4 specular = vec4(spec * u_Material.SpecularColor, 1.0f);
@@ -133,14 +132,13 @@ vec4 CalculatePointLight()
 {
     PointLight light = u_Lighting.Point;
     
-    vec3 norm = normalize(v2f.normal);
     vec3 lightDir = normalize(light.Position - v2f.fragPos);
 
-    float diff = max(dot(norm, lightDir), 0.0f);
+    float diff = max(dot(v2f.normal, lightDir), 0.0f);
     vec4 diffuse = vec4(diff * light.Color, 1.0f);
     
     vec3 viewDir = normalize(u_CameraPos - v2f.fragPos);
-    vec3 reflectionDir = reflect(-lightDir, norm);
+    vec3 reflectionDir = reflect(-lightDir, v2f.normal);
 
     float spec = pow(max(dot(viewDir, reflectionDir), 0.0f), u_Material.SpecularExponent);
     vec4 specular = vec4(spec * u_Material.SpecularColor, 1.0f);
@@ -154,15 +152,14 @@ vec4 CalculatePointLight()
 vec4 CalculateSpotLight()
 {
     SpotLight light = u_Lighting.Spot;
-
-    vec3 norm = normalize(v2f.normal);
+    
     vec3 lightDir = normalize(light.Position - v2f.fragPos);
 
-    float diff = max(dot(norm, lightDir), 0.0f);
+    float diff = max(dot(v2f.normal, lightDir), 0.0f);
     vec4 diffuse = vec4(diff * light.Color, 1.0f);
 
     vec3 viewDir = normalize(u_CameraPos - v2f.fragPos);
-    vec3 reflectionDir = reflect(-lightDir, norm);
+    vec3 reflectionDir = reflect(-lightDir, v2f.normal);
 
     float spec = pow(max(dot(viewDir, reflectionDir), 0.0f), u_Material.SpecularExponent);
     vec4 specular = vec4(spec * u_Material.SpecularColor, 1.0f);

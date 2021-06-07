@@ -31,6 +31,6 @@ private:
 
 	glm::vec2 m_LastMousePos;
 
-	const float kCameraRotationSpeed = 5.0f;
+	const float kCameraRotationSpeed = 2.0f;
 	const float kCameraMaxVerticalRotation = glm::radians(80.0f);
 };
